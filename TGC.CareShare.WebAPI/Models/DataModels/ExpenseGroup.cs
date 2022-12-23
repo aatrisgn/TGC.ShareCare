@@ -5,5 +5,10 @@
         public string Name { get; set; }
         public decimal TotalAmount { get; set; }
         public ICollection<ExpenseGroupMember> ExpenseGroupMembers { get; set; }
+
+        internal void Deactivate()
+        {
+            this.Active = false;
+        }
     }
 }

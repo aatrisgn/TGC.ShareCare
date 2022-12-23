@@ -15,10 +15,11 @@ namespace TGC.CareShare.WebAPI.Controllers
         }
 
         [Authorize]
-        [RequiredScope("operations.read")]
+        [RequiredScope("operation.read")]
         [HttpGet("healthcheck/authorized")]
         public IActionResult AuthorizedIndex()
         {
+            var some = HttpContext.User;
             return Ok("Working");
         }
     }
