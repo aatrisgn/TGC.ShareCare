@@ -2,8 +2,9 @@
 {
     public class Profile : DTOBaseClass
     {
-        public Guid UserId { get; set; }
-        public User User { get; set; }
+        public Guid AzureId { get; set; }
+        public string Email { get; set; }
+        public string GivenName { get; set; }
         public ICollection<ExpenseGroupMember> Memberships { get; set; }
     }
 }

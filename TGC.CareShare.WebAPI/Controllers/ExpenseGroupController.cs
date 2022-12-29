@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
+using Microsoft.IdentityModel.Tokens;
 using TGC.CareShare.WebAPI.Models.Request;
+using TGC.CareShare.WebAPI.Models.Response;
 using TGC.CareShare.WebAPI.Repositories;
 using TGC.CareShare.WebAPI.Services;
 
@@ -29,15 +31,20 @@ namespace TGC.CareShare.WebAPI.Controllers
 
         // GET api/<ExpenseGroupController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            return "value";
+            return Ok(await _expenseGroupService.GetById(id));
         }
 
         // POST api/<ExpenseGroupController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ExpenseGroupRequest expenseGroupRequest)
         {
+            if (expenseGroupRequest.Name.IsNullOrEmpty())
+            {
+                return BadRequest("Name cannot be null or empty.");
+            }
+
             var newExpensegroup = await _expenseGroupService.CreateExpenseGroup(expenseGroupRequest.Name);
 
             return Ok(newExpensegroup.Id);

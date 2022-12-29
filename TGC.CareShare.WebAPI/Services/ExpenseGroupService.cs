@@ -21,6 +21,11 @@ namespace TGC.CareShare.WebAPI.Services
             return await _expenseGroupRepository.GetAllIdsAsync();
         }
 
+        public async Task<ExpenseGroup> GetById(Guid id)
+        {
+            return await _expenseGroupRepository.GetByIdAsync(id);
+        }
+
         public async Task UpdateNameAsync(Guid id, string name)
         {
             var expenseGroup = await _expenseGroupRepository.GetByIdAsync(id);

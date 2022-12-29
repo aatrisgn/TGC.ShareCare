@@ -10,7 +10,6 @@ namespace TGC.CareShare.WebAPI.Repositories
         public DbSet<ExpenseGroup> ExpenseGroups { get; set; }
         public DbSet<ExpenseGroupMember> ExpenseGroupMembers { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<User> Users { get; set; }
         
         public CareShareDBContext(DbContextOptions<CareShareDBContext> options)
         : base(options)

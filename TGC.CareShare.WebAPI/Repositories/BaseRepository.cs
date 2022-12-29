@@ -14,6 +14,11 @@ namespace TGC.CareShare.WebAPI.Repositories
             Context = _careShareDBContext.Set<T>();
         }
 
+        protected async Task SaveChangesAsync()
+        {
+            await _careShareDBContext.SaveChangesAsync();
+        }
+
         public async Task<T> GetByIdAsync(Guid id)
         {
             return await Context.FirstAsync(t => t.Id == id);
@@ -27,12 +32,15 @@ namespace TGC.CareShare.WebAPI.Repositories
         public async Task<T> CreateAsync(T t)
         {
             var entity = await Context.AddAsync(t);
+            await _careShareDBContext.SaveChangesAsync();
             return entity.Entity;
         }
 
-        public T Update(T t)
+        public async Task<T> Update(T t)
         {
-            return Context.Update(t).Entity;
+            var entity = Context.Update(t).Entity;
+            await _careShareDBContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

@@ -7,6 +7,6 @@
         Task<T> CreateAsync(T t);
 
         Task<List<Guid>> GetAllIdsAsync();
-        T Update(T t);
+        Task<T> Update(T t);
     }
 }

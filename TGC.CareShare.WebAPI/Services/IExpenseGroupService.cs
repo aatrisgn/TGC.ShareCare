@@ -6,5 +6,6 @@ namespace TGC.CareShare.WebAPI.Services
     {
         Task<ExpenseGroup> CreateExpenseGroup(string expenseGroupName);
         Task<List<Guid>> GetAllIdsAsync();
+        Task<ExpenseGroup> GetById(Guid id);
     }
 }
