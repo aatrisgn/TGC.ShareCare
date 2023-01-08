@@ -1,4 +1,5 @@
-﻿using TGC.CareShare.WebAPI.Models.DataModels;
+﻿using Microsoft.EntityFrameworkCore;
+using TGC.CareShare.WebAPI.Models.DataModels;
 
 namespace TGC.CareShare.WebAPI.Repositories
 {
@@ -6,6 +7,11 @@ namespace TGC.CareShare.WebAPI.Repositories
     {
         public ExpenseGroupRepository(CareShareDBContext careShareDBContext) : base(careShareDBContext)
         {
+        }
+
+        public async Task<List<Guid>> GetAllIdsByAzureIdAsync(Guid profileId)
+        {
+            return await Context.Where(e => e.ExpenseGroupMembers.Any(egm => egm.ProfileId == profileId)).Select(t => t.Id).ToListAsync();
         }
     }
 }

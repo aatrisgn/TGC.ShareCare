@@ -42,5 +42,10 @@ namespace TGC.CareShare.WebAPI.Repositories
             await _careShareDBContext.SaveChangesAsync();
             return entity;
         }
+
+        public async Task<bool> ExistsByIdAsync(Guid id)
+        {
+            return await Context.AnyAsync(t => t.Id == id);
+        }
     }
 }

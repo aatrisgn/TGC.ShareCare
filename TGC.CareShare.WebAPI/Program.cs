@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using TGC.CareShare.WebAPI;
+using TGC.CareShare.WebAPI.Middleware;
 using TGC.CareShare.WebAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +45,8 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseMiddleware<UserRegistrationMiddleware>();
 
 app.UseEndpoints(endpoints =>
 {

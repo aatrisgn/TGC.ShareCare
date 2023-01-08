@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 using Microsoft.IdentityModel.Tokens;
+using TGC.CareShare.WebAPI.Constants;
 using TGC.CareShare.WebAPI.Models.Request;
 using TGC.CareShare.WebAPI.Models.Response;
 using TGC.CareShare.WebAPI.Repositories;
@@ -14,7 +15,7 @@ namespace TGC.CareShare.WebAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    [RequiredScope("operation.read")]
+    [RequiredScope(AuthorizationScopes.OperationRead)]
     public class ExpenseGroupController : ControllerBase
     {
         private readonly IExpenseGroupService _expenseGroupService;
@@ -26,7 +27,7 @@ namespace TGC.CareShare.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _expenseGroupService.GetAllIdsAsync());
+            return Ok(await _expenseGroupService.GetAllIdsByAzureIdAsync());
         }
 
         // GET api/<ExpenseGroupController>/5

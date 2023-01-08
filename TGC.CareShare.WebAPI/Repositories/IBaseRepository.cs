@@ -8,5 +8,7 @@
 
         Task<List<Guid>> GetAllIdsAsync();
         Task<T> Update(T t);
+
+        Task<bool> ExistsByIdAsync(Guid id);
     }
 }

@@ -7,6 +7,8 @@ namespace TGC.CareShare.WebAPI.Models.DataModels
         public DTOBaseClass()
         {
             Created = DateTime.Now;
+            LastEdited = DateTime.Now;
+            Active = true;
         }
 
         [Key]

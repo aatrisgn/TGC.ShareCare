@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
+using TGC.CareShare.WebAPI.Constants;
 
 namespace TGC.CareShare.WebAPI.Controllers
 {
@@ -15,7 +16,7 @@ namespace TGC.CareShare.WebAPI.Controllers
         }
 
         [Authorize]
-        [RequiredScope("operation.read")]
+        [RequiredScope(AuthorizationScopes.OperationRead)]
         [HttpGet("healthcheck/authorized")]
         public IActionResult AuthorizedIndex()
         {
