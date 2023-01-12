@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TGC.CareShare.WebAPI.Repositories;
 
@@ -11,9 +12,10 @@ using TGC.CareShare.WebAPI.Repositories;
 namespace TGC.CareShare.WebAPI.Migrations
 {
     [DbContext(typeof(CareShareDBContext))]
-    partial class CareShareDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230112205323_Introduced invitation schema")]
+    partial class Introducedinvitationschema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

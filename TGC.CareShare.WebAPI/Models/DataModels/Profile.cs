@@ -6,5 +6,8 @@
         public string Email { get; set; }
         public string GivenName { get; set; }
         public ICollection<ExpenseGroupMember> Memberships { get; set; }
+        public ICollection<ExpenseGroupInvitation> SentInvitations { get; set; }
+
+        public ICollection<ExpenseGroupInvitation> ReceivedInvitations { get; set; }
     }
 }

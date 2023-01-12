@@ -11,10 +11,12 @@ namespace TGC.CareShare.WebAPI
         {
             serviceCollection.AddScoped<IExpenseGroupRepository, ExpenseGroupRepository>();
             serviceCollection.AddScoped<IExpenseGroupMemberRepository, ExpenseGroupMemberRepository>();
+            serviceCollection.AddScoped<IExpenseGroupInvitationRepository, ExpenseGroupInvitationRepository>();
             serviceCollection.AddScoped<IProfileRepository, ProfileRepository>();
 
             serviceCollection.AddScoped<IExpenseGroupService, ExpenseGroupService>();
             serviceCollection.AddScoped<IExpenseGroupMemberService, ExpenseGroupMemberService>();
+            serviceCollection.AddScoped<IExpenseGroupInvitationService, ExpenseGroupInvitationService>();
             serviceCollection.AddScoped<IProfileService, ProfileService>();
 
             serviceCollection.AddScoped<IUserContext, UserContext>();

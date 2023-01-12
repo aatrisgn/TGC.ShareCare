@@ -10,7 +10,8 @@ namespace TGC.CareShare.WebAPI.Repositories
         public DbSet<ExpenseGroup> ExpenseGroups { get; set; }
         public DbSet<ExpenseGroupMember> ExpenseGroupMembers { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-        
+        public DbSet<ExpenseGroupInvitation> ExpenseGroupInvitations { get; set; }
+
         public CareShareDBContext(DbContextOptions<CareShareDBContext> options)
         : base(options)
         {
@@ -30,6 +31,23 @@ namespace TGC.CareShare.WebAPI.Repositories
 
             modelBuilder.Entity<ExpenseGroupMember>()
                 .Property(e => e.Paid).HasColumnType("money");
+
+            modelBuilder.Entity<ExpenseGroupInvitation>()
+                .HasOne(egi => egi.ExpenseGroup)
+                .WithMany(eg => eg.expenseGroupInvitations)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ExpenseGroupInvitation>()
+                .HasOne(egi => egi.Profile)
+                .WithMany(p => p.SentInvitations)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ExpenseGroupInvitation>()
+                .HasOne(egi => egi.InvitationProfile)
+                .WithMany(p => p.ReceivedInvitations)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using TGC.CareShare.WebAPI.Models.DataModels;
 
 namespace TGC.CareShare.WebAPI.Repositories
@@ -41,6 +42,11 @@ namespace TGC.CareShare.WebAPI.Repositories
             var entity = Context.Update(t).Entity;
             await _careShareDBContext.SaveChangesAsync();
             return entity;
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await Context.AnyAsync(predicate);
         }
 
         public async Task<bool> ExistsByIdAsync(Guid id)

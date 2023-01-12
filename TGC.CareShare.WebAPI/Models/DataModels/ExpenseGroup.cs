@@ -6,6 +6,8 @@
         public decimal TotalAmount { get; set; }
         public ICollection<ExpenseGroupMember> ExpenseGroupMembers { get; set; }
 
+        public ICollection<ExpenseGroupInvitation> expenseGroupInvitations { get; set; }
+
         internal void Deactivate()
         {
             this.Active = false;

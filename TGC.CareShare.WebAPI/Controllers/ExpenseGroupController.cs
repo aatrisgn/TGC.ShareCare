@@ -12,7 +12,7 @@ using TGC.CareShare.WebAPI.Services;
 
 namespace TGC.CareShare.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     [Authorize]
     [RequiredScope(AuthorizationScopes.OperationRead)]

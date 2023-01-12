@@ -4,54 +4,54 @@ using Microsoft.Identity.Web.Resource;
 using TGC.CareShare.WebAPI.Constants;
 using TGC.CareShare.WebAPI.Models.Request;
 using TGC.CareShare.WebAPI.Models.Response;
+using TGC.CareShare.WebAPI.Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace TGC.CareShare.WebAPI.Controllers;
 
-namespace TGC.CareShare.WebAPI.Controllers
+[Route("api/v1/invitations")]
+[ApiController]
+[Authorize]
+[RequiredScope(AuthorizationScopes.OperationRead)]
+public class InvitationController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    [Authorize]
-    [RequiredScope(AuthorizationScopes.OperationRead)]
-    public class InvitationController : ControllerBase
+    private readonly IExpenseGroupInvitationService _expenseGroupInvitationService;
+    public InvitationController(IExpenseGroupInvitationService expenseGroupInvitationService)
     {
-        // GET: api/<InvitationController>
-        [HttpGet("Recieved")]
-        public IEnumerable<Guid> GetRecievedInvitations()
-        {
-            return new Guid[] { Guid.NewGuid()};
-        }
+        _expenseGroupInvitationService = expenseGroupInvitationService;
+    }
 
-        [HttpGet("Sent")]
-        public IEnumerable<Guid> GetSentInvitations()
-        {
-            return new Guid[] { Guid.NewGuid() };
-        }
+    // GET: api/<InvitationController>
+    [HttpGet("Received")]
+    public async Task<IEnumerable<InvitationResponse>> GetRecievedInvitations()
+    {
+        return await _expenseGroupInvitationService.GetReceivedInvitations();
+    }
 
-        // GET api/<InvitationController>/5
-        [HttpGet("{id}")]
-        public InvitationResponse Get(Guid id)
-        {
-            return new InvitationResponse();
-        }
+    [HttpGet("sent")]
+    public async Task<IEnumerable<InvitationResponse>> GetSentInvitations()
+    {
 
-        // POST api/<InvitationController>
-        [HttpPost]
-        public InvitationResponse Post([FromBody] InvitationRequest invitationRequest)
-        {
-            return new InvitationResponse();
-        }
+        return await _expenseGroupInvitationService.GetSentInvitations();
+    }
 
-        // PUT api/<InvitationController>/5
-        [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] InvitationRequest invitationRequest)
-        {
-        }
+    // GET api/<InvitationController>/5
+    [HttpGet("{id}")]
+    public async Task<InvitationResponse> GetInvitation(Guid id)
+    {
+        return await _expenseGroupInvitationService.GetInvitationById(id);
+    }
 
-        // DELETE api/<InvitationController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+    // POST api/<InvitationController>
+    [HttpPost]
+    public async Task<InvitationResponse> Post([FromBody] InvitationRequest invitationRequest)
+    {
+        return await _expenseGroupInvitationService.CreateNewInvitation(invitationRequest);
+    }
+
+    // PUT api/<InvitationController>/5
+    [HttpPut("{id}")]
+    public async Task Put(Guid id, [FromBody] InvitationRequest invitationRequest)
+    {
+        await _expenseGroupInvitationService.UpdateInvitation(id, invitationRequest);
     }
 }
