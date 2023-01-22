@@ -8,5 +8,6 @@ namespace TGC.CareShare.WebAPI.Services
         Task<List<Guid>> GetAllIdsAsync();
         Task<ExpenseGroup> GetById(Guid id);
         Task<List<Guid>> GetAllIdsByAzureIdAsync();
+        Task<List<ExpenseGroup>> GetAllByAzureIdAsync();
     }
 }

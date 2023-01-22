@@ -459,3 +459,5 @@ baseline.json
 .husky/_
 aio/content/examples/.DS_Store
 .angular/cache/
+.angular/cache
+TGC.CareShare.ClientApp/.angular/cache

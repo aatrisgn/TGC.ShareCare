@@ -1,0 +1,24 @@
+<div class="container" id="expenseGroupWrapper">
+  <mat-grid-list cols="3" >
+    <mat-grid-tile *ngFor="let expenseGroup of expenseGroups">
+      <mat-card class="expense-group-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{expenseGroup.name}}</mat-card-title>
+          <mat-card-subtitle>Total amount shared: {{expenseGroup.totalAmount}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="expense-group-image" src="https://caresharedevsa.blob.core.windows.net/publicimages/CareShare only logo.png" alt="Default care share logo">
+        <mat-card-content>
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a href="/expensegroup/{{expenseGroup.id}}"><button mat-raised-button color="primary">Open</button></a>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

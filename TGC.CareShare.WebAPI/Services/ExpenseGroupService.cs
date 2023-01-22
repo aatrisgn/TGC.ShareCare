@@ -44,6 +44,13 @@ namespace TGC.CareShare.WebAPI.Services
             return await _expenseGroupRepository.GetAllIdsAsync();
         }
 
+        public async Task<List<ExpenseGroup>> GetAllByAzureIdAsync()
+        {
+            var profile = await _profileService.GetProfileByAzureIdAsync(_userContext.GetUserAADId());
+
+            return await _expenseGroupRepository.GetAllByAzureIdAsync(profile.Id);
+        }
+
         public async Task<List<Guid>> GetAllIdsByAzureIdAsync()
         {
             var profile = await _profileService.GetProfileByAzureIdAsync(_userContext.GetUserAADId());

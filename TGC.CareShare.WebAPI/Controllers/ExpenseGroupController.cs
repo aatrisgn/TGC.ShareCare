@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 using Microsoft.IdentityModel.Tokens;
 using TGC.CareShare.WebAPI.Constants;
+using TGC.CareShare.WebAPI.Models.DataModels;
 using TGC.CareShare.WebAPI.Models.Request;
 using TGC.CareShare.WebAPI.Models.Response;
 using TGC.CareShare.WebAPI.Repositories;
@@ -25,30 +26,36 @@ namespace TGC.CareShare.WebAPI.Controllers
         }
         // GET: api/<ExpenseGroupController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<Guid>> GetAllIds()
         {
-            return Ok(await _expenseGroupService.GetAllIdsByAzureIdAsync());
+            return await _expenseGroupService.GetAllIdsByAzureIdAsync();
+        }
+
+        [HttpGet("details")]
+        public async Task<List<ExpenseGroup>> GetAllWithDetails()
+        {
+            return await _expenseGroupService.GetAllByAzureIdAsync();
         }
 
         // GET api/<ExpenseGroupController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<ExpenseGroup> GetExpenseGroup(Guid id)
         {
-            return Ok(await _expenseGroupService.GetById(id));
+            return await _expenseGroupService.GetById(id);
         }
 
         // POST api/<ExpenseGroupController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ExpenseGroupRequest expenseGroupRequest)
+        public async Task<Guid> Post([FromBody] ExpenseGroupRequest expenseGroupRequest)
         {
             if (expenseGroupRequest.Name.IsNullOrEmpty())
             {
-                return BadRequest("Name cannot be null or empty.");
+                throw new ArgumentNullException(nameof(expenseGroupRequest));
             }
 
             var newExpensegroup = await _expenseGroupService.CreateExpenseGroup(expenseGroupRequest.Name);
 
-            return Ok(newExpensegroup.Id);
+            return newExpensegroup.Id;
         }
 
         // PUT api/<ExpenseGroupController>/5
